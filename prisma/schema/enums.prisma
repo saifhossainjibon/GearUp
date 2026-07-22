@@ -1,6 +1,6 @@
 enum Role {
   CUSTOMER
-  PROVIDER
+  PROVIDER 
   ADMIN
 }
 enum ActiveStatus {

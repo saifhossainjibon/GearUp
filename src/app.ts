@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import express, { Application, Request, Response } from "express";
 import { userRoutes } from "./modules/auth/auth.route";
-import { gearRoutes } from "./modules/gear/gear.route";
+import { providerRoutes } from "./modules/provider/provider.route";
 
 
 
@@ -16,6 +16,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 // Here we'll write our API endpoint
 app.use("/api/auth", userRoutes)
-app.use("/api/gear", gearRoutes)
+app.use("/api/provider", providerRoutes)
 
 export default app;
