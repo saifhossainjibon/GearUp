@@ -2,6 +2,8 @@ import cookieParser from "cookie-parser";
 import express, { Application, Request, Response } from "express";
 import { userRoutes } from "./modules/auth/auth.route";
 import { providerRoutes } from "./modules/provider/provider.route";
+import { notFound } from "./middlewares/notFound";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 
 
@@ -18,4 +20,8 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/auth", userRoutes)
 app.use("/api/provider", providerRoutes)
 
+
+
+app.use(notFound)
+app.use(globalErrorHandler)
 export default app;
