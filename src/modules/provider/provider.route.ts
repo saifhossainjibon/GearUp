@@ -7,5 +7,6 @@ const router =Router()
 router.post("/gear", auth(Role.PROVIDER), providerController.addGear)
 router.put("/gear/:id", auth(Role.PROVIDER, Role.ADMIN), providerController.updateGear)
 router.delete("/gear/:id", auth(Role.PROVIDER, Role.ADMIN), providerController.deleteGear)
+router.get("/orders", auth(Role.PROVIDER, Role.ADMIN), providerController.getProviderOrders)
 
 export const providerRoutes = router

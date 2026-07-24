@@ -69,6 +69,20 @@ const deleteGear = catchAsync(
   },
 );
 
+
+const getProviderOrders = catchAsync(async (req, res) => {
+  const providerId = req.user?.id;
+
+  const result = await providerService.getProviderOrders(providerId as string);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: HttpStatus.OK,
+    message: "Provider orders retrieved successfully.",
+    data: result,
+  });
+});
+
 export const providerController ={
-    addGear, updateGear, deleteGear
+    addGear, updateGear, deleteGear, getProviderOrders
 }
