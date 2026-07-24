@@ -35,7 +35,7 @@ const getMyRentalOrders = catchAsync(async (req: Request, res: Response, next: N
   },
 );
 
-const getRentalOrderById = catchAsync(async (req, res) => {
+const getRentalOrderById = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const rentalOrderId = req.params?.id;
   const customerId = req.user?.id;
 

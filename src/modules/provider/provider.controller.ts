@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
-import  HttpStatus  from "http-status";
+import HttpStatus from "http-status";
 import { providerService } from "./provider.service";
 
 const addGear = catchAsync(
@@ -19,12 +19,13 @@ const addGear = catchAsync(
   },
 );
 
-const updateGear = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const updateGear = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
     const providerId = req.user?.id;
     const gearId = req.params.id;
     const payload = req.body;
     const isAdmin = req.user?.role === "ADMIN";
-    
+
     if (!gearId) {
       throw new Error("gear Id Required In Params");
     }
@@ -32,8 +33,8 @@ const updateGear = catchAsync(async (req: Request, res: Response, next: NextFunc
     const result = await providerService.updateGear(
       gearId as string,
       payload,
-      providerId as string, 
-      isAdmin
+      providerId as string,
+      isAdmin,
     );
 
     sendResponse(res, {
@@ -57,7 +58,7 @@ const deleteGear = catchAsync(
     await providerService.deleteGear(
       gearId as string,
       providerId as string,
-      isAdmin
+      isAdmin,
     );
 
     sendResponse(res, {
@@ -69,20 +70,50 @@ const deleteGear = catchAsync(
   },
 );
 
+const getProviderOrders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const providerId = req.user?.id;
 
-const getProviderOrders = catchAsync(async (req, res) => {
-  const providerId = req.user?.id;
+    const result = await providerService.getProviderOrders(
+      providerId as string,
+    );
 
-  const result = await providerService.getProviderOrders(providerId as string);
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Provider orders retrieved successfully.",
+      data: result,
+    });
+  },
+);
 
-  sendResponse(res, {
-    success: true,
-    statusCode: HttpStatus.OK,
-    message: "Provider orders retrieved successfully.",
-    data: result,
-  });
-});
+const updateRentalStatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const providerId = req.user?.id;
 
-export const providerController ={
-    addGear, updateGear, deleteGear, getProviderOrders
-}
+    const id = req.params?.id;
+    if (!id) {
+      throw new Error("Rental orders id required In Params");
+    }
+    const result = await providerService.updateRentalStatus(
+      id as string,
+      providerId as string,
+      req.body,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: "Rental order status updated successfully.",
+      data: result,
+    });
+  },
+);
+
+export const providerController = {
+  addGear,
+  updateGear,
+  deleteGear,
+  getProviderOrders,
+  updateRentalStatus,
+};

@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import { IAddGearPayload, IUpdateGearPayload } from "./provider.interface";
+import { IAddGearPayload, IUpdateGearPayload, IUpdateRentalStatusPayload } from "./provider.interface";
 
 const addGearToDB = async (payload: IAddGearPayload, providerId: string) => {
 
@@ -100,6 +100,56 @@ const getProviderOrders = async (providerId: string) => {
   return result;
 };
 
+const updateRentalStatus = async ( rentalOrderId: string, providerId: string, payload: IUpdateRentalStatusPayload) => {
+  const {status} = payload
+  const rentalOrder = await prisma.rentalOrder.findFirstOrThrow({
+    where: {
+      id: rentalOrderId,
+    },
+    include: {
+      rentalItems: {
+        include: {
+          gearItem: true,
+        },
+      },
+    },
+  });
+
+  const isOwner = rentalOrder.rentalItems.some(
+    (item) => item.gearItem.providerId === providerId,
+  );
+
+  if (!isOwner) {
+    throw new Error(
+      "You are not authorized to update this rental order!",
+    );
+  }
+
+  const result = await prisma.rentalOrder.update({
+    where: {
+      id: rentalOrderId,
+    },
+    data: {
+      status
+    },
+    include: {
+      customer: {
+        omit: {
+          password: true,
+        },
+      },
+      rentalItems: {
+        include: {
+          gearItem: true,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+
+
 export const providerService = {
-  addGearToDB, updateGear, deleteGear, getProviderOrders
+  addGearToDB, updateGear, deleteGear, getProviderOrders, updateRentalStatus 
 };
