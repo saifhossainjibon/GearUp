@@ -9,5 +9,6 @@ model User {
     createdAt DateTime     @default(now())
     updatedAt DateTime     @updatedAt
     gearItems     GearItem[] 
+    rentalOrder RentalOrder[]
     @@map("users")
 }
