@@ -103,7 +103,6 @@ const createRental = async (
 };
 
 const getMyRentalOrders = async (customerId: string) => {
-
   const result = await prisma.rentalOrder.findMany({
     where: {
       customerId,
@@ -123,7 +122,39 @@ const getMyRentalOrders = async (customerId: string) => {
   return result;
 };
 
+const getRentalOrderById = async (rentalOrderId: string,customerId: string) => {
+  const rentalOrder = await prisma.rentalOrder.findFirstOrThrow({
+    where: {
+      id: rentalOrderId,
+    },
+    include: {
+      customer: {
+        omit: {
+          password: true,
+        },
+      },
+      rentalItems: {
+        include: {
+          gearItem: true,
+        },
+      },
+    },
+  });
+
+  if (rentalOrder.customerId !== customerId) {
+    throw new Error("You are not authorized to view this rental order!");
+  }
+
+  return rentalOrder;
+};
+
+export const RentalService = {
+  createRental,
+  getMyRentalOrders,
+  getRentalOrderById,
+};
 export const rentalService = {
   createRental,
   getMyRentalOrders,
+  getRentalOrderById,
 };
