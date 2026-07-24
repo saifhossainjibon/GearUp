@@ -43,4 +43,52 @@ const updateUserStatus = async (userId: string, payload: IUpdateUserStatusPayloa
 
   return result;
 };
-export const adminService = {getAllUsers, updateUserStatus}
+
+
+const getAllGear = async () => {
+  const result = await prisma.gearItem.findMany({
+    include: {
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return result;
+};
+
+const getAllRentalOrders = async () => {
+  const result = await prisma.rentalOrder.findMany({
+    include: {
+      customer: {
+        omit: {
+          password: true,
+        },
+      },
+      rentalItems: {
+        include: {
+          gearItem: {
+            include: {
+              provider: {
+                omit: {
+                  password: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return result;
+};
+export const adminService = {getAllUsers, updateUserStatus, getAllGear, getAllRentalOrders}
