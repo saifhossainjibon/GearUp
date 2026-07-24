@@ -6,6 +6,7 @@ import { notFound } from "./middlewares/notFound";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { gearRoutes } from "./modules/gear/gear.route";
 import { rentalRoutes } from "./modules/rental/rental.route";
+import { adminRoutes } from "./modules/admin/admin.route";
 
 
 
@@ -23,6 +24,7 @@ app.use("/api/auth", userRoutes)
 app.use("/api/provider", providerRoutes)
 app.use("/api/gear", gearRoutes)
 app.use("/api/rentals", rentalRoutes)
+app.use("/api/admin", adminRoutes)
 
 
 
