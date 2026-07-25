@@ -7,6 +7,7 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { gearRoutes } from "./modules/gear/gear.route";
 import { rentalRoutes } from "./modules/rental/rental.route";
 import { adminRoutes } from "./modules/admin/admin.route";
+import { paymentRoutes } from "./modules/payment/payment.route";
 
 
 
@@ -25,6 +26,7 @@ app.use("/api/provider", providerRoutes)
 app.use("/api/gear", gearRoutes)
 app.use("/api/rentals", rentalRoutes)
 app.use("/api/admin", adminRoutes)
+app.use("/api/create", paymentRoutes)
 
 
 
