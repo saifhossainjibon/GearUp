@@ -11,6 +11,6 @@ model RentalOrder {
   updatedAt   DateTime     @updatedAt
   rentalItems RentalItem[]
   payment     Payment?
-
+  reviews Review[]
   @@map("rental_orders")
 }
