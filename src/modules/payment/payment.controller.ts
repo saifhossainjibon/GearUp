@@ -35,26 +35,7 @@ const handleWebhook = catchAsync(
   },
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const getPaymentHistory = catchAsync(async (req, res) => {
+const getPaymentHistory = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const customerId = req.user?.id;
   const result = await paymentService.getPaymentHistory(customerId as string);
 
@@ -66,7 +47,7 @@ const getPaymentHistory = catchAsync(async (req, res) => {
   });
 });
 
-const getPaymentById = catchAsync(async (req, res) => {
+const getPaymentById = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const customerId = req.user?.id;
   const paymentId = req.params.id;
 

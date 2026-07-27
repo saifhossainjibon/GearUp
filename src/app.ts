@@ -10,6 +10,7 @@ import { adminRoutes } from "./modules/admin/admin.route";
 import { paymentRoutes } from "./modules/payment/payment.route";
 import cors from "cors";
 import config from "./config";
+import { reviewRoutes } from "./modules/review/review.route";
 
 
 
@@ -35,6 +36,7 @@ app.use("/api/gear", gearRoutes)
 app.use("/api/rentals", rentalRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/payments", paymentRoutes)
+app.use("/api/reviews", reviewRoutes)
 
 app.use(notFound)
 app.use(globalErrorHandler)
