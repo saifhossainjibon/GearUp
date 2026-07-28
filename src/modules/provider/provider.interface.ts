@@ -1,4 +1,4 @@
-import { GearCondition, RentalStatus } from "../../../generated/prisma/enums";
+import { GearCondition, RentalStatusForProvider } from "../../../generated/prisma/enums";
 
 
 export interface IAddGearPayload {
@@ -11,7 +11,7 @@ export interface IAddGearPayload {
   condition: GearCondition;
   image: string;
   isAvailable?: boolean;
-  category: string;
+  categoryId: string;
 }
 export interface IUpdateGearPayload {
   name?: string;
@@ -23,8 +23,8 @@ export interface IUpdateGearPayload {
   condition?: GearCondition;
   image?: string;
   isAvailable?: boolean;
-  category?: string;
+  categoryId?: string;
 }
 export interface IUpdateRentalStatusPayload {
-  status: RentalStatus;
+  status: RentalStatusForProvider;
 }

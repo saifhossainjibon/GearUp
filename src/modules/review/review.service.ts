@@ -4,7 +4,7 @@ import { RentalStatus } from "../../../generated/prisma/enums";
 
 
 const createReview = async (customerId: string, payload: ICreateReviewPayload) => {
-  const rentalOrder = await prisma.rentalOrder.findFirstOrThrow({
+  const rentalOrder = await prisma.rentalOrder.findUnique({
     where: {
       id: payload.rentalOrderId,
       customerId,
@@ -13,7 +13,11 @@ const createReview = async (customerId: string, payload: ICreateReviewPayload) =
       rentalItems: true,
     },
   });
-
+  if(!rentalOrder){
+        throw new Error(
+      "can not find the rental order and item",
+    );
+  }
   if (rentalOrder.status !== RentalStatus.RETURNED) {
     throw new Error(
       "You can review only after returning the rental.",

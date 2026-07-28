@@ -58,6 +58,25 @@ const getMyProfile = async (
   });
 };
 
+const updateMyProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const userId = req.user?.id as string;
+  const payload = req.body;
+  const updatedProfile = await authService.updateMyProfileIntoDB(
+    userId,
+    payload,
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: HttpStatus.OK,
+    message: "User Updated successfully",
+    data: { updatedProfile },
+  });
+};
+
 export const authController = {
-  registerUser,logInUser,getMyProfile
+  registerUser,logInUser,getMyProfile, updateMyProfile
 };

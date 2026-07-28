@@ -29,3 +29,10 @@ enum PaymentStatus {
   FAILED
   REFUNDED
 }
+
+enum RentalStatusForProvider {
+  CONFIRMED
+  PICKED_UP
+  RETURNED
+  CANCELLED
+}

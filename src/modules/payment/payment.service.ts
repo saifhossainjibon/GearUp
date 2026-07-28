@@ -9,12 +9,15 @@ const createPayment = async (
   payload: ICreatePaymentPayload,
 ) => {
   const transactionResult = await prisma.$transaction(async (tx) => {
-    const rentalOrder = await tx.rentalOrder.findUniqueOrThrow({
+    const rentalOrder = await tx.rentalOrder.findUnique({
       where: {
         id: payload.rentalOrderId,
         customerId,
       }
     });
+    if (!rentalOrder) {
+      throw new Error("Rental order can not find");
+    }
     if (rentalOrder.status !== "PLACED") {
       throw new Error("This rental order cannot be paid.");
     }

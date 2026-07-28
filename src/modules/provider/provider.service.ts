@@ -1,28 +1,45 @@
 import { prisma } from "../../lib/prisma";
-import { IAddGearPayload, IUpdateGearPayload, IUpdateRentalStatusPayload } from "./provider.interface";
+import {
+  IAddGearPayload,
+  IUpdateGearPayload,
+  IUpdateRentalStatusPayload,
+} from "./provider.interface";
 
 const addGearToDB = async (payload: IAddGearPayload, providerId: string) => {
+  const { categoryId } = payload;
+  const category = await prisma.category.findUnique({
+    where: {
+      id: categoryId,
+    },
+  });
+  if (!category) {
+    throw new Error("The Category id is not getting");
+  }
 
   const result = await prisma.gearItem.create({
     data: {
-      ...payload, providerId
+      ...payload,
+      providerId,
     },
   });
+
   return result;
 };
-
 
 const updateGear = async (
   gearId: string,
   payload: IUpdateGearPayload,
   providerId: string,
-  isAdmin: boolean
+  isAdmin: boolean,
 ) => {
-  const gear = await prisma.gearItem.findUniqueOrThrow({
+  const gear = await prisma.gearItem.findUnique({
     where: {
       id: gearId,
     },
   });
+  if (!gear) {
+    throw new Error("Gear id is incorrect");
+  }
   if (!isAdmin && gear.providerId !== providerId) {
     throw new Error("You are not the owner of this gear!");
   }
@@ -37,7 +54,7 @@ const updateGear = async (
         omit: {
           password: true,
         },
-      }
+      },
     },
   });
 
@@ -49,17 +66,20 @@ const deleteGear = async (
   providerId: string,
   isAdmin: boolean,
 ) => {
-  const gear = await prisma.gearItem.findFirstOrThrow({
+  const gear = await prisma.gearItem.findUnique({
     where: {
-      id: gearId
+      id: gearId,
     },
   });
+  if (!gear) {
+    throw new Error("Gear id is incorrect");
+  }
   if (!isAdmin && gear.providerId !== providerId) {
     throw new Error("You are not the owner of this post!");
   }
   await prisma.gearItem.delete({
     where: {
-      id: gearId
+      id: gearId,
     },
   });
 };
@@ -100,8 +120,12 @@ const getProviderOrders = async (providerId: string) => {
   return result;
 };
 
-const updateRentalStatus = async ( rentalOrderId: string, providerId: string, payload: IUpdateRentalStatusPayload) => {
-  const {status} = payload
+const updateRentalStatus = async (
+  rentalOrderId: string,
+  providerId: string,
+  payload: IUpdateRentalStatusPayload,
+) => {
+  const { status } = payload;
   const rentalOrder = await prisma.rentalOrder.findFirstOrThrow({
     where: {
       id: rentalOrderId,
@@ -120,9 +144,7 @@ const updateRentalStatus = async ( rentalOrderId: string, providerId: string, pa
   );
 
   if (!isOwner) {
-    throw new Error(
-      "You are not authorized to update this rental order!",
-    );
+    throw new Error("You are not authorized to update this rental order!");
   }
 
   const result = await prisma.rentalOrder.update({
@@ -130,7 +152,7 @@ const updateRentalStatus = async ( rentalOrderId: string, providerId: string, pa
       id: rentalOrderId,
     },
     data: {
-      status
+      status,
     },
     include: {
       customer: {
@@ -149,7 +171,10 @@ const updateRentalStatus = async ( rentalOrderId: string, providerId: string, pa
   return result;
 };
 
-
 export const providerService = {
-  addGearToDB, updateGear, deleteGear, getProviderOrders, updateRentalStatus 
+  addGearToDB,
+  updateGear,
+  deleteGear,
+  getProviderOrders,
+  updateRentalStatus,
 };

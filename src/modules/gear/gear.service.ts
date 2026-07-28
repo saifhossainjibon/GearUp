@@ -5,9 +5,12 @@ const getAllGears = async () => {
   return gears
 };
 const getGearDetails = async (geadId: string) => {
-  const gear = await prisma.gearItem.findUniqueOrThrow({
+  const gear = await prisma.gearItem.findUnique({
     where:{id:geadId}
   });
+  if(!gear){
+    throw new Error("There have no gear with this ID")
+  }
   return gear
 };
 

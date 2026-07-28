@@ -1,7 +1,6 @@
 import { Role } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
-import { IUpdateUserStatusPayload } from "./admin.interface";
-
+import { ICategoryPayload, IUpdateUserStatusPayload } from "./admin.interface";
 
 const getAllUsers = async () => {
   const result = await prisma.user.findMany({
@@ -15,10 +14,11 @@ const getAllUsers = async () => {
 
   return result;
 };
-
-
-const updateUserStatus = async (userId: string, payload: IUpdateUserStatusPayload) => {
-  const {status} =payload
+const updateUserStatus = async (
+  userId: string,
+  payload: IUpdateUserStatusPayload,
+) => {
+  const { status } = payload;
   const user = await prisma.user.findUniqueOrThrow({
     where: {
       id: userId,
@@ -34,7 +34,7 @@ const updateUserStatus = async (userId: string, payload: IUpdateUserStatusPayloa
       id: userId,
     },
     data: {
-      status
+      status,
     },
     omit: {
       password: true,
@@ -43,8 +43,6 @@ const updateUserStatus = async (userId: string, payload: IUpdateUserStatusPayloa
 
   return result;
 };
-
-
 const getAllGear = async () => {
   const result = await prisma.gearItem.findMany({
     include: {
@@ -61,7 +59,6 @@ const getAllGear = async () => {
 
   return result;
 };
-
 const getAllRentalOrders = async () => {
   const result = await prisma.rentalOrder.findMany({
     include: {
@@ -91,4 +88,71 @@ const getAllRentalOrders = async () => {
 
   return result;
 };
-export const adminService = {getAllUsers, updateUserStatus, getAllGear, getAllRentalOrders}
+const addCategoryToDB = async (payload: ICategoryPayload) => {
+  const isCategoryExist = await prisma.category.findUnique({
+    where: {
+      name: payload.name,
+    },
+  });
+  if (isCategoryExist) {
+    throw new Error("Already This category is exist");
+  }
+  const result = await prisma.category.create({
+    data: {
+      ...payload,
+    },
+  });
+
+  return result;
+};
+const getAllCategoryFromDB = async () => {
+  const category = await prisma.category.findMany();
+  return category;
+};
+const updateCategoryToDB = async (
+  categoryId: string,
+  payload: ICategoryPayload,
+) => {
+  const category = await prisma.category.findUnique({
+    where: { id: categoryId },
+  });
+
+  if (!category) {
+    throw new Error("There have no category with this ID");
+  }
+
+  const result = await prisma.category.update({
+    where: {
+      id: categoryId,
+    },
+    data: payload,
+  });
+
+  return result;
+};
+const deleteCategoryFromDB = async (categoryId: string) => {
+  const category = await prisma.category.findUnique({
+    where: {
+      id: categoryId,
+    },
+  });
+  if (!category) {
+    throw new Error("There have no category with this ID");
+  }
+  await prisma.category.delete({
+    where: {
+      id: categoryId,
+    },
+  });
+};
+
+export const adminService = {
+  getAllUsers,
+  updateUserStatus,
+  getAllGear,
+  getAllRentalOrders,
+  addCategoryToDB,
+  getAllCategoryFromDB,
+  updateCategoryToDB,
+  deleteCategoryFromDB,
+};
