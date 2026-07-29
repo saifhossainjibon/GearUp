@@ -5,12 +5,13 @@ import HttpStatus from "http-status";
 import { gearService } from "./gear.service";
 
 const getAllGears = catchAsync(async (req : Request, res : Response, next : NextFunction) => {
-    const result = await gearService.getAllGears();
+    const query = req.query;
+    const result = await gearService.getAllGears(query);
 
     sendResponse(res, {
         success : true,
         statusCode : HttpStatus.OK,
-        message : "All Gears Retrieved Successfully",
+        message : "Gears Retrieved Successfully",
         data: result
     })
 })
