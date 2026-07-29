@@ -13,7 +13,7 @@ declare global {
         id: string;
         name: string;
         email: string;
-        phone: string;
+        phone?: string | null;
         role: Role;
         status: ActiveStatus;
       };
@@ -44,7 +44,7 @@ export const auth = (...requierdRoles: Role[]) => {
       throw new Error("You do not have permission to access this resource");
     }
     const user = await prisma.user.findUniqueOrThrow({
-      where: { id, name, email, role },
+      where: { id },
     });
     if (!user) {
       throw new Error("User Not Found");
@@ -53,12 +53,12 @@ export const auth = (...requierdRoles: Role[]) => {
       throw new Error("Your account is SUSPENDED, please contact at support");
     }
     req.user = {
-      id,
-      name,
-      email,
-      role,
-      phone,
-      status
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      phone: user.phone,
+      status: user.status,
     };
     next();
   });
