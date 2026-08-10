@@ -1,0 +1,888 @@
+{
+  "info": {
+    "_postman_id": "940ef19f-986a-416b-b2c7-0a9c9132f8df",
+    "name": "GearUp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54924029",
+    "_collection_link": "https://go.postman.co/collection/54924029-940ef19f-986a-416b-b2c7-0a9c9132f8df?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"hossain\",\r\n  \"email\": \"hossain@gmail.com\",\r\n  \"phone\": \"+8801712345678\",\r\n  \"password\": \"12345\",\r\n  \"role\": \"CUSTOMER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/auth/register",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "log in",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/auth/login",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get my profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Saif Hossain Jibon\",\r\n  \"email\": \"saif@gmail.com\",\r\n  \"phone\": \"+8801712345678\",\r\n  \"password\": \"12345\",\r\n  \"role\": \"ADMIN\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/auth/me",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update my profile",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/auth/my-profile",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "my-profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Provider",
+      "item": [
+        {
+          "name": "Add Gear",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Rickshaw\",\r\n    \"description\": \"Versatile snowboard with hybrid camber profile, sintered base, and carbon fiber reinforcement. Suitable for all terrain types.\",\r\n    \"brand\": \"Burton\",\r\n    \"model\": \"Custom X\",\r\n    \"pricePerDay\": 45,\r\n    \"availableStock\": 2,\r\n    \"condition\": \"GOOD\",\r\n    \"image\": \"/images/gear/snowboard.jpg\",\r\n    \"categoryId\": \"cms4rxifi0004nguioz8dmsxo\",\r\n    \"isAvailable\": true\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/provider/gear",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "gear"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Gear",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/provider/gear/6fdc55ad-bafc-4fc6-b743-3e4a01e63dcc",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "gear",
+                "6fdc55ad-bafc-4fc6-b743-3e4a01e63dcc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update Gear",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Yoga Mat\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/provider/gear/11a08c76-8e1a-402e-af76-1f0f78d23146",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "gear",
+                "11a08c76-8e1a-402e-af76-1f0f78d23146"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get provider's incoming orders",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startDate\": \"2026-08-01\",\r\n  \"endDate\": \"2026-08-05\",\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"f56a31e5-6278-4059-af42-4f3297e6b51b\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"gearItemId\": \"ce7c8ebd-6d95-4533-8c22-d06a9e5617f5\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/provider/orders",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update rental order status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"PICKED_UP\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/provider/orders/dee93f78-57a0-42b7-a46c-9db6a9e6cdd0",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "provider",
+                "orders",
+                "dee93f78-57a0-42b7-a46c-9db6a9e6cdd0"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Gear",
+      "item": [
+        {
+          "name": "Get All Gears-(with filters)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/gear",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "cms4rwdr80000nguivj2a8m36",
+                  "disabled": true
+                },
+                {
+                  "key": "brand",
+                  "value": "Giant",
+                  "disabled": true
+                },
+                {
+                  "key": "pricePerDay",
+                  "value": "55",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get gear details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/gear/6550e7ce-bcd7-4249-90b6-9ee04dc9af17",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "6550e7ce-bcd7-4249-90b6-9ee04dc9af17"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rentals-(Customer)",
+      "item": [
+        {
+          "name": "Create new rental order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startDate\": \"2026-08-01\",\r\n  \"endDate\": \"2026-08-05\",\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"11a08c76-8e1a-402e-af76-1f0f78d23146\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"gearItemId\": \"2e70a557-e678-4c2d-9390-6ece99abad91\",\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/rentals",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user's rental orders",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startDate\": \"2026-08-01\",\r\n  \"endDate\": \"2026-08-05\",\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"3061fd68-4461-468a-a2ac-81e3f5cc5832\",\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"gearItemId\": \"665dfcdb-aa4b-44f4-a25e-6b79e1e957cc\",\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/rentals",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get rental order by id-(track)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startDate\": \"2026-08-01\",\r\n  \"endDate\": \"2026-08-05\",\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"f56a31e5-6278-4059-af42-4f3297e6b51b\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"gearItemId\": \"ce7c8ebd-6d95-4533-8c22-d06a9e5617f5\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/rentals/85d27f10-06f1-40a8-90db-d2938e92f22b",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "85d27f10-06f1-40a8-90db-d2938e92f22b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get all users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startDate\": \"2026-08-01\",\r\n  \"endDate\": \"2026-08-05\",\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"f56a31e5-6278-4059-af42-4f3297e6b51b\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"gearItemId\": \"ce7c8ebd-6d95-4533-8c22-d06a9e5617f5\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/users",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user status (suspend/activate)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/users/8a8be914-a1bf-446c-ada6-10322818b03a",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users",
+                "8a8be914-a1bf-446c-ada6-10322818b03a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all gear listings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/gear",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "gear"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all rental orders",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Visualization Script",
+                  "// Visualization Script",
+                  "const template = `",
+                  "<style>",
+                  "  body { font-family: sans-serif; padding: 12px; }",
+                  "  h2 { font-size: 15px; margin-bottom: 10px; color: #333; }",
+                  "  table { width: 100%; border-collapse: collapse; font-size: 13px; }",
+                  "  th { background: #4f46e5; color: #fff; padding: 8px 10px; text-align: left; }",
+                  "  td { padding: 7px 10px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }",
+                  "  tr:nth-child(even) td { background: #f9fafb; }",
+                  "  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }",
+                  "  .PLACED  { background: #dbeafe; color: #1d4ed8; }",
+                  "  .PAID    { background: #dcfce7; color: #15803d; }",
+                  "  .CANCELLED { background: #fee2e2; color: #b91c1c; }",
+                  "  .items-list { margin: 0; padding-left: 14px; }",
+                  "</style>",
+                  "<h2>Rental Orders</h2>",
+                  "<table>",
+                  "  <thead>",
+                  "    <tr>",
+                  "      <th>#</th>",
+                  "      <th>Customer</th>",
+                  "      <th>Period</th>",
+                  "      <th>Days</th>",
+                  "      <th>Items</th>",
+                  "      <th>Total (BDT)</th>",
+                  "      <th>Status</th>",
+                  "    </tr>",
+                  "  </thead>",
+                  "  <tbody>",
+                  "    {{#each orders}}",
+                  "    <tr>",
+                  "      <td>{{index}}</td>",
+                  "      <td><strong>{{customerName}}</strong><br>{{customerEmail}}</td>",
+                  "      <td>{{startDate}}<br>→ {{endDate}}</td>",
+                  "      <td>{{totalDays}}</td>",
+                  "      <td><ul class=\"items-list\">{{#each items}}<li>{{name}} x{{qty}}</li>{{/each}}</ul></td>",
+                  "      <td>{{totalAmount}}</td>",
+                  "      <td><span class=\"badge {{status}}\">{{status}}</span></td>",
+                  "    </tr>",
+                  "    {{/each}}",
+                  "  </tbody>",
+                  "</table>`;",
+                  "",
+                  "function createPayload() {",
+                  "  var body = pm.response.json();",
+                  "  var orders = body.data.map(function(order, i) {",
+                  "    return {",
+                  "      index: i + 1,",
+                  "      customerName: order.customer.name,",
+                  "      customerEmail: order.customer.email,",
+                  "      startDate: order.startDate.slice(0, 10),",
+                  "      endDate: order.endDate.slice(0, 10),",
+                  "      totalDays: order.totalDays,",
+                  "      totalAmount: order.totalAmount.toLocaleString(),",
+                  "      status: order.status,",
+                  "      items: order.rentalItems.map(function(item) {",
+                  "        return { name: item.gearItem.name, qty: item.quantity };",
+                  "      })",
+                  "    };",
+                  "  });",
+                  "  return { orders: orders };",
+                  "}",
+                  "",
+                  "pm.visualizer.set(template, createPayload());"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/rentals",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Water Sports\",\r\n    \"description\": \"Kayaks, paddleboards, life jackets, and snorkeling equipment\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/category",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "category"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Golf\",\r\n    \"description\": \"Golf clubs, bags, balls, and putting accessories\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/category",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "category"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update Category",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Water Sport\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/category/cms4rx9cw0002nguimeod4w58",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "category",
+                "cms4rx9cw0002nguimeod4w58"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Golf\",\r\n    \"description\": \"Golf clubs, bags, balls, and putting accessories\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/admin/category/cms4rx9cw0002nguimeod4w58",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "category",
+                "cms4rx9cw0002nguimeod4w58"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Create a payment intent/session for a rental order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rentalOrderId\": \"00f0ac25-0490-480d-94b2-1328a0a4c578\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/payments/create",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user's payment history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/payments/",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get payment details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/payments/3d8e9adf-e26a-42e5-8603-84a83add0875",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "3d8e9adf-e26a-42e5-8603-84a83add0875"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "item": [
+        {
+          "name": "Give Review",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rentalOrderId\": \"00f0ac25-0490-480d-94b2-1328a0a4c578\",\r\n  \"gearItemId\": \"f40fb54f-3073-433a-aaf6-0dc9dc4afafd\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Excellent quality. Highly recommended.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gearup-xi.vercel.app/api/reviews",
+              "protocol": "https",
+              "host": [
+                "gearup-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
